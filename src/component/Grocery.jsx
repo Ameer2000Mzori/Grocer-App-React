@@ -4,12 +4,14 @@ import { Data } from './hooks/Data.jsx'
 export const Grocery = () => {
   const [ourData, setOurData] = useState([])
 
+  // getting our data
   useEffect(() => {
     const newData = Data()
     console.log(newData)
     setOurData(newData)
   }, [])
 
+  // change checked and unchecked
   const changeCheckBox = (index) => {
     const numericIndex = Number(index)
 
@@ -21,6 +23,15 @@ export const Grocery = () => {
     })
 
     setOurData(updatedData)
+  }
+
+  // delete function
+  const deleteItem = (index) => {
+    const numericIndex = Number(index)
+    const newList = ourData.filter((item) => {
+      return item.id !== numericIndex
+    })
+    setOurData(newList)
   }
 
   return (
@@ -51,7 +62,13 @@ export const Grocery = () => {
                     />
 
                     <p>{data.text}</p>
-                    <button>Delete</button>
+                    <button
+                      onClick={() => {
+                        deleteItem(data.id)
+                      }}
+                    >
+                      Delete
+                    </button>
                   </li>
                 )
               })}
