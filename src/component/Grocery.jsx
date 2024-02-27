@@ -5,7 +5,13 @@ export const Grocery = () => {
     <>
       <div>
         <div>
-          <h1>Grocery List</h1>
+          <div>
+            <h1>Grocery List</h1>
+            <div>
+              <input type="text" placeholder="add somet..." />
+              <button>submit</button>
+            </div>
+          </div>
           <div>
             <ul>
               <li>
