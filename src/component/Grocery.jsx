@@ -3,13 +3,26 @@ import { Data } from './hooks/Data.jsx'
 
 export const Grocery = () => {
   const [ourData, setOurData] = useState([])
-  const [checkBox, setCheckBox] = useState(false)
 
   useEffect(() => {
     const newData = Data()
     console.log(newData)
     setOurData(newData)
   }, [])
+
+  const changeCheckBox = (index) => {
+    const numericIndex = Number(index)
+
+    const updatedData = ourData.map((item, idx) => {
+      if (idx === numericIndex) {
+        return { ...item, checked: !item.checked }
+      }
+      return item
+    })
+
+    setOurData(updatedData)
+  }
+
   return (
     <>
       <div>
@@ -23,15 +36,17 @@ export const Grocery = () => {
           </div>
           <div>
             <ul>
-              {ourData.map((data) => {
+              {ourData.map((data, index) => {
                 return (
                   <li key={data.id}>
                     <input
+                      data-index={index}
                       type="checkbox"
                       checked={data.checked ? true : false}
-                      value={checkBox}
                       onChange={(e) => {
-                        setCheckBox(e.target.value)
+                        changeCheckBox(
+                          e.currentTarget.getAttribute('data-index')
+                        )
                       }}
                     />
 
