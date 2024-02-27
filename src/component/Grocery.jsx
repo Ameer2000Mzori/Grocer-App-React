@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import uniqid from 'uniqid'
 import DeleteItem from './hooks/DeleteItem.jsx'
 import changeCheckBox from './hooks/changeCheckBox.jsx'
+import addNewItem from './hooks/addNewItem.jsx'
 
 export const Grocery = () => {
   const [ourData, setOurData] = useState([])
@@ -15,20 +15,7 @@ export const Grocery = () => {
   }, [])
 
   // adding new item to the function
-  const addNewItem = () => {
-    if (newData === undefined || newData === null || newData === '') {
-    } else {
-      const newItem = {
-        id: uniqid(),
-        text: newData,
-        checked: false,
-      }
-      const updatedData = [...ourData, newItem]
-      setOurData(updatedData)
-      localStorage.setItem('data', JSON.stringify(updatedData))
-      setNewData('')
-    }
-  }
+  // const addNewItem = () => {}
 
   return (
     <>
@@ -45,7 +32,13 @@ export const Grocery = () => {
                   setNewData(e.target.value)
                 }}
               />
-              <button onClick={addNewItem}>submit</button>
+              <button
+                onClick={() => {
+                  addNewItem(ourData, newData, setOurData, setNewData)
+                }}
+              >
+                submit
+              </button>
             </div>
           </div>
           <div>
