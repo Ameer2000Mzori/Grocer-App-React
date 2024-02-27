@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Data } from './hooks/Data.jsx'
+import uniqid from 'uniqid'
 
 export const Grocery = () => {
   const [ourData, setOurData] = useState([])
+  const [newData, setNewData] = useState('')
 
   // getting our data
   useEffect(() => {
@@ -27,11 +29,21 @@ export const Grocery = () => {
 
   // delete function
   const deleteItem = (index) => {
-    const numericIndex = Number(index)
     const newList = ourData.filter((item) => {
-      return item.id !== numericIndex
+      return item.id !== index
     })
     setOurData(newList)
+  }
+
+  // adding new item to the function
+  const addNewItem = () => {
+    const newItem = {
+      id: uniqid(),
+      text: newData,
+      checked: false,
+    }
+    setOurData([...ourData, newItem])
+    console.log(ourData)
   }
 
   return (
@@ -41,8 +53,15 @@ export const Grocery = () => {
           <div>
             <h1>Grocery List</h1>
             <div>
-              <input type="text" placeholder="add somet..." />
-              <button>submit</button>
+              <input
+                type="text"
+                placeholder="add somet..."
+                value={newData}
+                onChange={(e) => {
+                  setNewData(e.target.value)
+                }}
+              />
+              <button onClick={addNewItem}>submit</button>
             </div>
           </div>
           <div>
