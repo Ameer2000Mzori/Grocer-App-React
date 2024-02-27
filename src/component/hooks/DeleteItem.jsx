@@ -1,5 +1,3 @@
-import React from 'react'
-
 const DeleteItem = (index, ourData, setOurData) => {
   const newList = ourData.filter((item) => {
     return item.id !== index

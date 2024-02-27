@@ -28,26 +28,20 @@ export const Grocery = () => {
     setNewData('')
   }
 
-  // delete function
-  // const deleteItem = (index) => {
-  //   const newList = ourData.filter((item) => {
-  //     return item.id !== index
-  //   })
-  //   setOurData(newList)
-  //   localStorage.setItem('data', JSON.stringify(newList))
-  // }
-
   // adding new item to the function
   const addNewItem = () => {
-    const newItem = {
-      id: uniqid(),
-      text: newData,
-      checked: false,
+    if (newData === undefined || newData === null || newData === '') {
+    } else {
+      const newItem = {
+        id: uniqid(),
+        text: newData,
+        checked: false,
+      }
+      const updatedData = [...ourData, newItem]
+      setOurData(updatedData)
+      localStorage.setItem('data', JSON.stringify(updatedData))
+      setNewData('')
     }
-    const updatedData = [...ourData, newItem]
-    setOurData(updatedData)
-    localStorage.setItem('data', JSON.stringify(updatedData))
-    setNewData('')
   }
 
   return (
