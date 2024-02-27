@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import uniqid from 'uniqid'
+import DeleteItem from './hooks/DeleteItem.jsx'
 
 export const Grocery = () => {
   const [ourData, setOurData] = useState([])
@@ -28,13 +29,13 @@ export const Grocery = () => {
   }
 
   // delete function
-  const deleteItem = (index) => {
-    const newList = ourData.filter((item) => {
-      return item.id !== index
-    })
-    setOurData(newList)
-    localStorage.setItem('data', JSON.stringify(newList))
-  }
+  // const deleteItem = (index) => {
+  //   const newList = ourData.filter((item) => {
+  //     return item.id !== index
+  //   })
+  //   setOurData(newList)
+  //   localStorage.setItem('data', JSON.stringify(newList))
+  // }
 
   // adding new item to the function
   const addNewItem = () => {
@@ -86,7 +87,7 @@ export const Grocery = () => {
                     <p>{data.text}</p>
                     <button
                       onClick={() => {
-                        deleteItem(data.id)
+                        DeleteItem(data.id, ourData, setOurData)
                       }}
                     >
                       Delete
