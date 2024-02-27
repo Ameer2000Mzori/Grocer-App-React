@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import uniqid from 'uniqid'
 import DeleteItem from './hooks/DeleteItem.jsx'
+import changeCheckBox from './hooks/changeCheckBox.jsx'
 
 export const Grocery = () => {
   const [ourData, setOurData] = useState([])
@@ -12,21 +13,6 @@ export const Grocery = () => {
     const initialData = storedData ? JSON.parse(storedData) : []
     setOurData(initialData)
   }, [])
-  // change checked and unchecked
-  const changeCheckBox = (index) => {
-    const numericIndex = Number(index)
-
-    const updatedData = ourData.map((item, idx) => {
-      if (idx === numericIndex) {
-        return { ...item, checked: !item.checked }
-      }
-      return item
-    })
-
-    setOurData(updatedData)
-    localStorage.setItem('data', JSON.stringify(updatedData))
-    setNewData('')
-  }
 
   // adding new item to the function
   const addNewItem = () => {
@@ -73,7 +59,10 @@ export const Grocery = () => {
                       checked={data.checked ? true : false}
                       onChange={(e) => {
                         changeCheckBox(
-                          e.currentTarget.getAttribute('data-index')
+                          e.currentTarget.getAttribute('data-index'),
+                          ourData,
+                          setOurData,
+                          setNewData
                         )
                       }}
                     />
