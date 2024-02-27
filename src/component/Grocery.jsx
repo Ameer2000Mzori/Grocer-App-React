@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Data } from './hooks/Data.jsx'
 import uniqid from 'uniqid'
 
 export const Grocery = () => {
@@ -8,11 +7,10 @@ export const Grocery = () => {
 
   // getting our data
   useEffect(() => {
-    const newData = Data()
-    console.log(newData)
-    setOurData(newData)
+    const storedData = localStorage.getItem('data')
+    const initialData = storedData ? JSON.parse(storedData) : []
+    setOurData(initialData)
   }, [])
-
   // change checked and unchecked
   const changeCheckBox = (index) => {
     const numericIndex = Number(index)
@@ -25,6 +23,8 @@ export const Grocery = () => {
     })
 
     setOurData(updatedData)
+    localStorage.setItem('data', JSON.stringify(updatedData))
+    setNewData('')
   }
 
   // delete function
@@ -33,6 +33,7 @@ export const Grocery = () => {
       return item.id !== index
     })
     setOurData(newList)
+    localStorage.setItem('data', JSON.stringify(newList))
   }
 
   // adding new item to the function
@@ -42,8 +43,10 @@ export const Grocery = () => {
       text: newData,
       checked: false,
     }
-    setOurData([...ourData, newItem])
-    console.log(ourData)
+    const updatedData = [...ourData, newItem]
+    setOurData(updatedData)
+    localStorage.setItem('data', JSON.stringify(updatedData))
+    setNewData('')
   }
 
   return (
