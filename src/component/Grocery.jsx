@@ -60,7 +60,15 @@ export const Grocery = () => {
                       }}
                     />
 
-                    <p>{data.text}</p>
+                    <p
+                      className={
+                        data.checked
+                          ? ' text-blue-400 line-through'
+                          : 'text-black'
+                      }
+                    >
+                      {data.text}
+                    </p>
                     <button
                       onClick={() => {
                         DeleteItem(data.id, ourData, setOurData)
