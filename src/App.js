@@ -1,6 +1,7 @@
 import react from 'react'
+import { Grocery } from './component/Grocery.jsx'
 function App() {
-  return <h1>Hello World</h1>
+  return <Grocery />
 }
 
 export default App
