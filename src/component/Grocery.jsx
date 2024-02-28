@@ -14,9 +14,6 @@ export const Grocery = () => {
     setOurData(initialData)
   }, [])
 
-  // adding new item to the function
-  // const addNewItem = () => {}
-
   return (
     <>
       <div className="flex flex-col text-center items-center justify-center h-[100vh] w-[100vw]">
@@ -41,7 +38,7 @@ export const Grocery = () => {
               </button>
             </div>
           </div>
-          <div>
+          <div className=" h-[85%] overflow-auto">
             <ul>
               {ourData.map((data, index) => {
                 return (
@@ -66,7 +63,7 @@ export const Grocery = () => {
                       <p
                         className={
                           data.checked
-                            ? ' text-blue-400 line-through'
+                            ? ' text-white line-through'
                             : 'text-black'
                         }
                       >
